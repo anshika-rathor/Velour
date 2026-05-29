@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/loginPage';
-import Signup from './pages/SignupPage';
+import Signup from './pages/signupPage';
 import Home from './pages/HomePage';
 import Protected from './components/ProtectedRoute';
+import ProductsPage from './pages/productPage';
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +14,11 @@ function App() {
         <Protected>
         <Home /> 
         </Protected>
+        }/>
+        <Route path = "/products" element = {
+          <Protected>
+            <ProductsPage />
+          </Protected>
         }/>
       </Routes>
     </BrowserRouter>

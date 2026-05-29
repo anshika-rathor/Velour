@@ -10,3 +10,10 @@ export const login = async (data)=>{
     const login = await axios.post('http://localhost:5000/auth/login', data);
     return login.data;
 }
+export const getMe = async () => {
+    const token = localStorage.getItem('token');
+    const res = await axios.get('http://localhost:5000/auth/me', {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.data;
+}

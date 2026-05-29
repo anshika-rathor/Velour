@@ -1,11 +1,13 @@
 import { createContext } from "react";
 import { useState} from "react";
 import { useContext } from "react";
-import { login as loginService, signup as signupService} from "../services/authService";
+import { useEffect } from "react";
+import { login as loginService, signup as signupService , getMe} from "../services/authService";
 
 const AuthContext = createContext();
 const AuthProvider = ({children})=>{
     const [user,setUser]= useState(null);
+    const [loading, setLoading] = useState(true);
 
     const login = async (data)=>{
     const res = await loginService(data);
@@ -24,9 +26,19 @@ const AuthProvider = ({children})=>{
         localStorage.removeItem('token');
         setUser(null);
     }
-
+    useEffect(()=>{
+    const restore = async ()=>{
+        const token = localStorage.getItem('token');
+        if(token){
+            const res = await getMe();
+            setUser(res.user);
+        }
+        setLoading(false);
+    }
+    restore();
+    },[]);
     return(
-        <AuthContext.Provider value={{user,login,signup,logout}}>
+        <AuthContext.Provider value={{user,login,signup,logout,loading}}>
             {children}
         </AuthContext.Provider>
     );

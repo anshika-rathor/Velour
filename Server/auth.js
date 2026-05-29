@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require("./User");
+const { protect } = require('./middleware');
 
 const router = express.Router();
 
@@ -33,4 +34,8 @@ router.post('/login',async(req,res)=>{
     }
 });
 
+router.get('/me', protect, async (req, res) => {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json({ user });
+});
 module.exports = router;
