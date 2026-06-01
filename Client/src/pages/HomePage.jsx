@@ -18,7 +18,7 @@ function Home(){
   { id: 4, name: 'Structured Blazer', price: '₹3,499',image: 'https://placehold.co/300x400/1a1a1a/gold?text=Velour' },
 ];
     return(
-        <div className="min-h-screen  bg-black text-white">
+        <div className="min-h-screen  ">
             <nav className="flex items-center  justify-between  px-8 py-4  border-b  border-white/10">
            
             <h1 className="text-2xl text-yellow-400 font-bold tracking-widest ">Velour</h1>

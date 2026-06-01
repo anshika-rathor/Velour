@@ -22,7 +22,7 @@ const passwordRef = useRef();
     navigate('/');
 }
 return(
-    <div className="flex  items-center justify-center bg-black min-h-screen text-white ">
+    <div className="flex  items-center justify-center  min-h-screen  ">
         <div className="flex flex-col gap-6 big-zinc-900 rounded-2xl w-96 p-10 mb-4 ">
             <h1 className="text-3xl text-yellow-400 tracking-widest font-bold text-center">VELOUR</h1>
             <p className="text-white/50 text-sm text-center" >Sign in to your account</p>

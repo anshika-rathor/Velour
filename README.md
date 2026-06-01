@@ -24,3 +24,8 @@ During login, the server verifies the user's credentials and generates a JWT tok
 - /auth — signup, login.
 - /products, /cart, /orders, /wishlist, /address, /reviews, /notifications, /outfits.
 
+### CartPage
+Fetches the authenticated user's cart from the `/api/cart` route. Displays each cart item with a placeholder image, product ID, price, quantity controls (increase/decrease), and a remove button. Shows a total price calculated using `reduce()` and a Checkout button at the bottom. Displays "Your cart is empty" if no items are present.
+
+### SettingsPage
+A settings page featuring a sidebar with six sections — Account Info, Addresses, Theme, Privacy, Data & Security, and Help. The active section is visually distinguished using a conditional ternary operator applied to the className. The Theme section contains a toggle button that switches the entire application between dark and light mode. This is achieved through ThemeContext — a globally shared React context — which updates the document body's className via useEffect whenever the theme state changes.

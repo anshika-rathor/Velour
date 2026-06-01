@@ -4,9 +4,13 @@ import Signup from './pages/signupPage';
 import Home from './pages/HomePage';
 import Protected from './components/ProtectedRoute';
 import ProductsPage from './pages/productPage';
+import CartPage from './pages/cartPage';
+import Settings from './pages/settingsPage';
+import Layout from './components/Layout';
 function App() {
   return (
     <BrowserRouter>
+    <Layout>
       <Routes>
         <Route path = "/login"  element = {<Login />} />
         <Route path = "/signup"  element = {<Signup />} />
@@ -20,7 +24,18 @@ function App() {
             <ProductsPage />
           </Protected>
         }/>
+        <Route path = "/cart" element = {
+          <Protected>
+            <CartPage />
+          </Protected>
+        }/>
+         <Route path = "/settings" element = {
+          <Protected>
+            <Settings />
+          </Protected>
+        }/>
       </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }

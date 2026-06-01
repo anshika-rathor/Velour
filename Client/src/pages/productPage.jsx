@@ -21,7 +21,7 @@ function ProductsPage(){
     }
 
     return(
-        <div className="bg-black min-h-screen px-10 py-10">
+        <div className=" min-h-screen px-10 py-10">
             <h1 className="text-yellow-400 tracking-widest text-3xl font-bold mb-7 text-center">OUR COLLECTION</h1>
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
                 {products.map((items) =>(
