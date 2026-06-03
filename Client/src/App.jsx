@@ -7,6 +7,7 @@ import ProductsPage from './pages/productPage';
 import CartPage from './pages/cartPage';
 import Settings from './pages/settingsPage';
 import Layout from './components/Layout';
+import WishListPage from './pages/wishlistPage';
 function App() {
   return (
     <BrowserRouter>
@@ -32,6 +33,11 @@ function App() {
          <Route path = "/settings" element = {
           <Protected>
             <Settings />
+          </Protected>
+        }/>
+        <Route path = "/wishlist" element = {
+          <Protected>
+            <WishListPage />
           </Protected>
         }/>
       </Routes>

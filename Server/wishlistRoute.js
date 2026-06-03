@@ -17,7 +17,7 @@ router.post('/wishlist',protect,async(req,res)=>{
 try{
     const addWish = await WishList.findOneAndUpdate(
     {userId:req.user.id},
-    {$push:{products:req.body.productId}},
+    {$addToSet:{products:req.body.productId}},
     {upsert:true,new:true});
     res.json(addWish);
 }

@@ -39,7 +39,7 @@ function Home(){
             <p className="text-yellow-400 tracking-widest text-sm mb-4">NEW COLLECTION 2026</p>
             <h2 className="text-6xl font-bold tracking-tight mb-4">Define Your Era</h2>
             <p className="text-lg mb-8 text-white/50">Premium fashion, curated for you.</p>
-            <Link to="/product" className = "text-black bg-yellow-400 px-8 py-3 font-bold tracking-widest ">Shop Now</Link>
+            <Link to="/products" className = "text-black bg-yellow-400 px-8 py-3 font-bold tracking-widest ">Shop Now</Link>
             </div>
            <h3 className ="text-2xl font-bold tracking-widest text-center mb-8 px-8 pt-16" >FEATURED</h3>
            <div className="grid grid-cols-4 gap-6 px-8 py-16">

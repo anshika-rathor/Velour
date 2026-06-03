@@ -17,3 +17,10 @@ export const getMe = async () => {
     });
     return res.data;
 }
+export const updateMe = async (data)=>{
+   const token =  localStorage.getItem('token');
+    const res = await axios.put('http://localhost:5000/auth/me',data ,{
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    return res.data;
+}
