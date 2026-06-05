@@ -62,6 +62,17 @@ return(
                     <div className="mt-8 flex flex-col gap-6 max-w-md">
                         <p className='text-sm tracking-widest'>Name</p>
                         <input className="w-full px-4 py-2 rounded-lg border bg-transparent outline-none text-sm" type="text" name='name' value={formData.name} onChange={handleChange} readOnly={!editMode} />
+
+                        <p className='text-sm tracking-widest'>E-mail</p>
+                        <input className="w-full px-4 py-2 rounded-lg border bg-transparent outline-none text-sm" type="email" name="email" value={formData.email} onChange={handleChange} readOnly={!editMode} />
+
+                        <p className="text-sm tracking-widest">Phone</p>
+                        <input className="w-full px-4 py-2 rounded-lg border bg-transparent outline-none text-sm" type="tel" name="phone" value={formData.phone} onChange={handleChange} readOnly={!editMode} />
+                       
+                        <div className="flex gap-4 mt-4">
+                            {!editMode  && <button className="px-6 py-2 rounded-lg border border-yellow-400 text-yellow-400 text-sm font-bold tracking-widest hover:shadow-[0_0_20px_rgba(255,215,0,0.4)] transition-all duration-200"  onClick={()=> setEditMode(true)}>Edit</button>}
+                           {editMode &&  <button className = "px-6 py-2 rounded-lg bg-yellow-400 text-black text-sm font-bold tracking-widest hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-200"   onClick ={handleSave}>Save</button>}
+                        </div>
                     </div>
                 </div>
 
