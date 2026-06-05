@@ -29,3 +29,17 @@ Fetches the authenticated user's cart from the `/api/cart` route. Displays each 
 
 ### SettingsPage
 A settings page featuring a sidebar with six sections — Account Info, Addresses, Theme, Privacy, Data & Security, and Help. The active section is visually distinguished using a conditional ternary operator applied to the className. The Theme section contains a toggle button that switches the entire application between dark and light mode. This is achieved through ThemeContext — a globally shared React context — which updates the document body's className via useEffect whenever the theme state changes.
+
+### Account Info  
+Fetches the logged-in user's name, email, and phone from /api/auth/me. Displays them in read-only fields by default. Clicking Edit enables the fields; clicking Save sends the updated data to PUT /api/auth/me and updates the UI.
+
+## Upcoming Features : 
+Checkout and Orders page
+Google / Facebook login
+AR Live try-on
+Outfit builder
+Price drop alerts
+Style profile
+Bilingual support (Hindi/English) via i18next
+TypeScript migration
+Deployment
