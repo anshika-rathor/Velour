@@ -1,20 +1,14 @@
-import { useNavigate, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 
 function Home(){
-    const navigate = useNavigate();
-    const {user, logout} = useAuth();
+    
+    const {user} = useAuth();
     const {theme} = useTheme();
-
-    const handleLogout = () => {
-        logout();
-        navigate('/login');
-    }
 
     if(!user) return <div>Loading...</div>
 
-    const categories = ['Women', 'Men', 'Accessories', 'Footwear', 'Sale'];
     const products = [
         { id: 1, name: 'Silk Evening Gown', price: '₹1999', image: 'https://placehold.co/300x400/1a1a1a/gold?text=Velour'},
         { id: 2, name: 'Premium Kurta Set', price: '₹1999', image: 'https://placehold.co/300x400/1a1a1a/gold?text=Velour'},
@@ -23,19 +17,7 @@ function Home(){
     ];
 
     return(
-        <div className="min-h-screen">
-            <nav className={`flex items-center justify-between px-8 py-4 border-b ${theme === 'dark' ? 'border-white/10' : 'border-black/10'}`}>
-                <h1 className="text-2xl text-yellow-400 font-bold tracking-widest">Velour</h1>
-                <div className={`flex gap-6 text-sm ${theme === 'dark' ? 'text-white/70' : 'text-black/70'}`}>
-                    {categories.map(cat=>(
-                        <span key={cat}>{cat}</span>
-                    ))}
-                </div>
-                <div className="flex gap-4 text-sm">
-                    <Link to="/cart">Cart</Link>
-                    <Link to="/account">Account</Link>
-                </div>
-            </nav>
+         <div className="min-h-screen">
 
             <div className="flex items-center justify-center flex-col text-center h-[80vh]">
                 <p className="text-yellow-400 tracking-widest text-sm mb-4">NEW COLLECTION 2026</p>
