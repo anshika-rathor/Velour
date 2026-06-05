@@ -1,5 +1,6 @@
-#VELOUR
+# VELOUR
 "Velour is a premium bilingual (Hindi/English) fashion e-commerce platform where anyone can buy and sell clothing, accessories, and lifestyle products — featuring modern capabilities such as AR live try-on, an outfit builder, and a personalised style profile.
+
 ## Tech Stack
 **Frontend**
 - React (Vite)
@@ -43,3 +44,6 @@ Style profile
 Bilingual support (Hindi/English) via i18next
 TypeScript migration
 Deployment
+
+### Theme Persistence —
+The selected theme is saved to localStorage via a useEffect that runs whenever the theme state changes. On every page load, ThemeContext reads from localStorage first — falling back to dark mode if nothing is saved. This ensures the theme persists across page refreshes and navigation without requiring the user to reselect it
