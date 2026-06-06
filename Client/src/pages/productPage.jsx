@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import {getAllProducts} from '../services/productService';
 import {addToWishlist} from "../services/wishlistService";
 import {useTheme} from "../context/ThemeContext";
+import {addToCart} from "../services/cartService";
 
 function ProductsPage(){
     const [products, setProducts] = useState([]);
@@ -35,6 +36,18 @@ function ProductsPage(){
         }
     }
 
+    async function handleAddToCart(productId){
+        try{
+            await addToCart({productId , quantity:1});
+            setMsg('Added to cart');
+            setTimeout(()=> setMsg(''),2000);
+
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+
     return(
         <div className="min-h-screen px-10 py-10">
             <h1 className="text-yellow-400 tracking-widest text-3xl font-bold mb-7 text-center">OUR COLLECTION</h1>
@@ -52,7 +65,7 @@ function ProductsPage(){
                                 <span className={`border text-xs px-2 py-1 rounded-md ${theme === 'dark' ? 'border-white/20 text-white/60' : 'border-black/20 text-black/60'}`} key={s}>{s}</span>
                             ))}
                         </div>
-                        <button className="mt-2 w-full bg-yellow-400 text-black font-bold py-2 rounded-lg tracking-widest hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-200" type="button">ADD TO CART</button>
+                        <button className="mt-2 w-full bg-yellow-400 text-black font-bold py-2 rounded-lg tracking-widest hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] transition-all duration-200" type="button" onClick={()=> handleAddToCart(items._id)}>ADD TO CART</button>
                         <button className="mt-1 w-full border border-yellow-400 text-yellow-400 font-bold py-2 rounded-lg tracking-widest hover:bg-yellow-400 hover:text-black transition-all duration-200" onClick={()=> handleAddToWish(items._id)}>ADD TO WISHLIST</button>
                     </div>
                 </div>
