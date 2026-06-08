@@ -79,13 +79,16 @@ return(
             </div>
             )}
             <div className="flex justify-end mt-10">
-                <div className = "flex flex-col gap-4 w-80 border rounded-2xl p-6">
-                <p>Total:</p>
-               <p>₹{prodDetails.reduce((total,item) =>total + item.price, 0)}</p>
+                <div className = {`${theme === 'dark' ?  ' border border-white/10' : 'border border-black/10'} flex flex-col gap-4 w-80  rounded-2xl p-6`}>
+                    <div className ="flex justify-between items-center">
+                     <p >Total:</p>
+                     <p>₹{prodDetails.reduce((total,item) =>total +(item.price * item.quantity), 0)}</p>
+                     
+               </div>
+               <button className="mt-6 bg-yellow-400 text-black font-bold py-3 rounded-lg tracking-widest hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-200">Checkout</button>
                 </div>
-                <span className="text-yellow-400">{prodDetails.reduce((total,item) =>total + item.price, 0)}</span>
             </div>
-            <button className="mt-6 w-full bg-yellow-400 text-black font-bold py-3 rounded-lg tracking-widest hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-200">Checkout</button>
+            
         </div>
     </div>
 );
