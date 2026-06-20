@@ -39,7 +39,7 @@ Fetches the logged-in user's name, email, and phone from /api/auth/me. Displays 
 The selected theme is saved to localStorage via a useEffect that runs whenever the theme state changes. On every page load, ThemeContext reads from localStorage first — falling back to dark mode if nothing is saved. This ensures the theme persists across page refreshes and navigation without requiring the user to reselect it.
 
 ## Upcoming Features : 
-Checkout and Orders page
+Checkout page
 Google / Facebook login
 AR Live try-on
 Outfit builder
