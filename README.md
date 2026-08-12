@@ -16,7 +16,7 @@
 - JWT — token based authentication and protected routes
 
 ## Authentication
-During login, the server verifies the user's credentials and generates a JWT token. This token consists of three parts: a header, a payload containing the user's ID, and a signature. The signature is created by combining the header and payload with a secret key (JWT_SECRET) stored securely in the server's environment variables. On every subsequent request, the server re-generates the signature and compares it with the token's signature — if they match, the request is authenticated; if they don't, the token has been tampered with and the request is rejected. Upon logout, the token is removed from the browser.
+During login, the server verifies the user's credentials and generates a JWT token. This token consists of three parts: a header, a payload containing the user's ID, and a signature. The signature is created by combining the header and payload with a secret key (JWT_SECRET) stored securely in the server's environment variables. On every subsequent request, the server re-generates the signature and compares it with the token's signature —  If they match and the token is valid, the request is authenticated; otherwise, the request is rejected. Upon logout, the token is removed from the browser.
 
 ## Models
 - User, Product, Cart, Order, Wishlist, Address, Review, Notification, Outfit.
@@ -41,7 +41,6 @@ The selected theme is saved to localStorage via a useEffect that runs whenever t
 ## Upcoming Features : 
 Checkout page
 Google / Facebook login
-AR Live try-on
 Outfit builder
 Price drop alerts
 Style profile
