@@ -7,12 +7,18 @@ const { protect } = require('./middleware');
 const router = express.Router();
 
 router.post('/signup',async(req,res)=>{
+    try{
     const {name,email,password ,phone} = req.body;
    const hashedPassword = await bcrypt.hash(password,10); 
     const user = new User({name , email , password:hashedPassword , phone});
     await user.save();
     const token = jwt.sign({id:user._id}, process.env.JWT_SECRET);
     res.json({token, user});
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({message:err.message});
+    }
 });
 
 router.post('/login',async(req,res)=>{

@@ -8,6 +8,7 @@ import CartPage from './pages/cartPage';
 import Settings from './pages/settingsPage';
 import Layout from './components/Layout';
 import WishListPage from './pages/wishlistPage';
+import Checkout from './pages/checkoutPage';
 function App() {
   return (
     <BrowserRouter>
@@ -38,6 +39,11 @@ function App() {
         <Route path = "/wishlist" element = {
           <Protected>
             <WishListPage />
+          </Protected>
+        }/>
+        <Route path = "/checkout" element = {
+          <Protected>
+            <Checkout />
           </Protected>
         }/>
       </Routes>

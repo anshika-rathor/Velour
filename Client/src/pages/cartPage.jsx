@@ -2,8 +2,10 @@ import {useState, useEffect} from 'react';
 import {getCart, removeItem, updateItem} from '../services/cartService';
 import {useTheme} from '../context/ThemeContext';
 import {getProductsById} from '../services/productService';
+import { useNavigate } from 'react-router-dom';
 
 function CartPage(){
+const navigate = useNavigate();
 const [cart, setCart] = useState(null);
 const [loading, setLoading] = useState(true);
 const [prodDetails,setProdDetails] = useState([]);
@@ -83,9 +85,8 @@ return(
                     <div className ="flex justify-between items-center">
                      <p >Total:</p>
                      <p>₹{prodDetails.reduce((total,item) =>total +(item.price * item.quantity), 0)}</p>
-                     
-               </div>
-               <button className="mt-6 bg-yellow-400 text-black font-bold py-3 rounded-lg tracking-widest hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-200">Checkout</button>
+                    </div>
+                    <button className="mt-6 bg-yellow-400 text-black font-bold py-3 rounded-lg tracking-widest hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-200" onClick={() => navigate('/checkout')}>Checkout</button>
                 </div>
             </div>
             
