@@ -3,6 +3,8 @@ import {useState, useEffect} from 'react';
 import { useTheme } from "../context/ThemeContext";
 import { useNavigate } from 'react-router-dom';
 import {getCart,updateItem , removeItem} from '../services/cartService';
+import api from '../Instance/axiosInstance' ;
+
 
 function Checkout(){
 
@@ -51,6 +53,44 @@ function Checkout(){
         setCart(updated);
     }
 
+    useEffect(()=>{
+        const scri = document.createElement("script");
+        scri.src = "https://checkout.razorpay.com/v1/checkout.js";
+        document.body.appendChild(scri);
+    },[]);
+
+    async function handlePayment(){
+        const {data} = await api.post("api/payment/create",{
+            amount : cartTotal * 100,
+            currency : "INR",
+            receipt : "order" + Date.now()
+        });
+        console.log(data);
+
+        const options = {
+            key:"rzp_test_TRbb6D2cYu8niU",
+            amount : data.amount,
+            currency:"INR",
+            order_id: data.id,
+            name : "VELOUR",
+            description:"Order Payment",
+            handler : async function(response){
+                const {data} = await api.post("api/payment/verify",{
+                   razorpay_order_id: response.razorpay_order_id,
+                   razorpay_payment_id: response.razorpay_payment_id,
+                   razorpay_signature:response.razorpay_signature
+                });
+                console.log(data);
+            },
+            theme :{
+                color: "#facc15"
+            }
+        } ;
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+
+    }
+    const cartTotal = prodDetails.reduce((total,item)=> total+(item.price * item.quantity),0);
     return(
         <div className = "min-h-screen px-10 py-10">
          <h1 className = "text-3xl font-bold tracking-widest text-center text-yellow-400 mb-10">CHECKOUT</h1>
@@ -88,10 +128,10 @@ function Checkout(){
                   </div>
                   <div className='flex justify-between border-t pt-4'>
                     <p className='font-bold text-lg'>Total</p>
-                    <p>₹{prodDetails.reduce((total,item) => total+(item.price * item.quantity),0)}</p>
+                    <p>₹{cartTotal}</p>
                    
                   </div>
-                   <button className='w-full text-2xl py-3 bg-yellow-400 border-black font-bold rounded-lg tracking-widest hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-200'>Place Order</button>
+                   <button className='w-full text-2xl py-3 bg-yellow-400 border-black font-bold rounded-lg tracking-widest hover:bg-yellow-400 hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-200' onClick={()=> handlePayment()}>Place Order</button>
                 </div>
             </div>
         </div>

@@ -11,6 +11,9 @@ const app = express();
 mongoose.connect(process.env.MONGO_URI)
 .then(()=> console.log("MongoDB Connected"))
 .catch((err)=>console.log("Not Connected" , err));
+mongoose.connection.once("open", () => {
+    console.log("Connected to DB:", mongoose.connection.name);
+});
 
 app.use(express.json());
 app.use(cors());
@@ -29,11 +32,12 @@ app.use('/api' , require("./addressRoute"));
 app.use('/api' , require("./reviewRoute"));
 app.use('/api' , require("./notificationRoute"));
 app.use('/api' , require("./outfitRoute"));
+app.use('/api',  require("./paymentRoute"));
 
 app.use((req,res,next)=>{
     res.status(404).json({message: "Server not found"});
 });
-app.use((err,req,res,next)=>{
+app.use((err,req,res,next) =>{
     res.status(500).json({message: err.message});
 });
 

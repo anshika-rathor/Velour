@@ -15,7 +15,13 @@ orderNumber :String,
 listingPrice:Number,
 discount:Number,
 deliveryFee:Number,
-paymentMethod:String
+paymentMethod:String,
+paymentStatus:{
+    type:String,
+    default:"pending"
+},
+razorpayOrderId:String,
+razorpayPaymentId:String
 });
 const Order = mongoose.model("Order",orderSchema);
 module.exports = Order;
