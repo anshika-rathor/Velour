@@ -40,7 +40,7 @@ function WishListPage(){
     }
     if(!wishList || wishList.length===0){
         return(
-            <p>Your WishList is Empty.</p>
+            <p className="flex flex-col items-center justify-center text-2xl my-2">Your WishList is Empty.</p>
         );
     }
 

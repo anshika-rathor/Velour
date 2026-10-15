@@ -7,8 +7,9 @@ import ProductsPage from './pages/productPage';
 import CartPage from './pages/cartPage';
 import Settings from './pages/settingsPage';
 import Layout from './components/Layout';
-import WishListPage from './pages/wishlistPage';
 import Checkout from './pages/checkoutPage';
+import OrderPage from './pages/orderPage';
+import WishListPage from './pages/wishListPage';
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,11 @@ function App() {
         <Route path = "/products" element = {
           <Protected>
             <ProductsPage />
+          </Protected>
+        }/>
+        <Route path="/orders" element={
+          <Protected>
+            <OrderPage />
           </Protected>
         }/>
         <Route path = "/cart" element = {

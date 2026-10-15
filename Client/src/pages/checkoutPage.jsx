@@ -9,6 +9,7 @@ import api from '../Instance/axiosInstance' ;
 function Checkout(){
 
     const {theme} = useTheme();
+    const [success,setSuccess] = useState(false);
     const navigate = useNavigate();
     const [cart , setCart] = useState(null);
     const [prodDetails,setProdDetails] = useState([]);
@@ -67,6 +68,7 @@ function Checkout(){
         });
         console.log(data);
 
+
         const options = {
             key:"rzp_test_TRbb6D2cYu8niU",
             amount : data.amount,
@@ -75,12 +77,17 @@ function Checkout(){
             name : "VELOUR",
             description:"Order Payment",
             handler : async function(response){
+                console.log("handler fired");
                 const {data} = await api.post("api/payment/verify",{
                    razorpay_order_id: response.razorpay_order_id,
                    razorpay_payment_id: response.razorpay_payment_id,
                    razorpay_signature:response.razorpay_signature
                 });
                 console.log(data);
+                setSuccess(true);
+                setTimeout(()=>{
+                    navigate("/orders");
+                },2000);
             },
             theme :{
                 color: "#facc15"
@@ -92,7 +99,13 @@ function Checkout(){
     }
     const cartTotal = prodDetails.reduce((total,item)=> total+(item.price * item.quantity),0);
     return(
-        <div className = "min-h-screen px-10 py-10">
+        success ? (
+            <div className="min-h-screen flex flex-col items-center justify-center bg-green-500 text-white">
+                <p className="text-6xl">✓</p>
+                <p className="text-2xl font-bold mt-4">Order Placed</p>
+            </div>
+        ) 
+       : (<div className = "min-h-screen px-10 py-10">
          <h1 className = "text-3xl font-bold tracking-widest text-center text-yellow-400 mb-10">CHECKOUT</h1>
         <div className = "flex flex-col gap-6">
            {prodDetails.map((item)=>
@@ -137,7 +150,7 @@ function Checkout(){
         </div>
 
     </div>
-        
+        )   
     )
 }
 

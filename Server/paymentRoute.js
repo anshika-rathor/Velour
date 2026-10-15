@@ -4,6 +4,7 @@ const router = express.Router();
 const instance = require("./config/razorpay");
 const crypto = require("crypto");
 const Order = require("./order");
+const Cart = require("./cart");
 
 router.post("/payment/create",protect,async(req,res)=>{
    try{
@@ -14,8 +15,8 @@ router.post("/payment/create",protect,async(req,res)=>{
 
     });
     const saveOrder = await Order.create({
-        userId:req.user._id,
-        totalPrice:req.body.amount/100,
+        userId: req.user._id,
+        totalPrice: req.body.amount/100,
         paymentStatus:"pending",
         razorpayOrderId:order.id
     });
@@ -29,6 +30,8 @@ catch(err){
 });
 
 router.post("/payment/verify",protect,async(req,res)=>{
+    console.log("VERIFY ROUTE REACHED");
+
     try{
        const {razorpay_order_id,razorpay_payment_id,razorpay_signature} = req.body;
        
@@ -37,11 +40,19 @@ router.post("/payment/verify",protect,async(req,res)=>{
         const final_sign = gen_sign.digest("hex");
 
         if(final_sign == razorpay_signature){
-            await Order.findOneAndUpdate(
+           const order = await Order.findOneAndUpdate(
                 {razorpayOrderId:razorpay_order_id},
-                {paymentStatus:"paid" , razorpayPaymentId:razorpay_payment_id}
+                {paymentStatus:"paid" , razorpayPaymentId:razorpay_payment_id},
+                {new:true}
             );
-           res.status(200).json({success:true , message : "Payment verified"});          
+            console.log("Order userId :",order.userId);
+            await Cart.findOneAndUpdate(
+                {userId:order.userId},
+                {products:[]}
+            );
+            console.log(order);
+           res.status(200).json({success:true , message : "Payment verified"});      
+               
         }
         else{
             res.status(400).json({success:false , message:"Invalid Signature"});
